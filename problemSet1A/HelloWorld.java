@@ -5,7 +5,7 @@
 
 import java.util.Scanner;
 
-class Hullo
+class HelloWorld
 {
 	public static void main(String[] args)
 	{
