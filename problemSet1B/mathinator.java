@@ -87,6 +87,7 @@ class mathinator
 		} else {
 			System.out.println("Bro what");
 		}
+    input.close();
 	}
 }
 
