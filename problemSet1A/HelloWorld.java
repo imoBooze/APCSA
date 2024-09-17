@@ -1,8 +1,5 @@
-
-/**
- * AP Computer Science
- * The beginning (dun dun dun)
- */
+//AP Computer Science
+//The beginning (dun dun dun)
 
 import java.util.Scanner;
 
@@ -34,6 +31,6 @@ class HelloWorld {
     System.out.println("You spend " + studyTime + " hours studying every day.");
     System.out.println("You spend " + watchTime + " hours watching shows every day.");
     System.out.println("In total, you spend " + sum + " hours studying and watching shows every day");
-
+    input.close();
   }
 }
