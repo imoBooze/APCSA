@@ -6,10 +6,12 @@ class Cylinder {
 
   public Cylinder() { // Default constructor
     base = new Circle(1);
+    height = 1;
   }
 
   public Cylinder(double r, double h) {
     base = new Circle(r);
+    height = h;
   }
 
   public String toString() {
