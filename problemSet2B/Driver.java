@@ -12,7 +12,8 @@ class Driver {
     System.out.println("1. formatPhoneNumber() -> Format a phone number");
     System.out.println("2. middleThree() -> Print the middle three characters of a word");
     System.out.println("3. swapLastTwo() -> Swap the last two characters of a word");
-    System.out.println("4. frontAgain() -> Check if the first two and last two characters of a word are the same");
+    System.out.println(
+        "4. frontAgain() -> Check if the first two and last two characters of a word are the same");
     System.out.print("Input a number to select an option: ");
 
     int option = input.nextInt();
@@ -47,11 +48,15 @@ class Driver {
       System.out.println(inputStr);
 
     } else if (option == 4) {
-      System.out.println("Input a word with at least 4 letters");
+      System.out.println("Input a word");
       String inputStr = input.nextLine();
 
-      inputStr = sTools.frontAgain(inputStr);
-      System.out.println(inputStr);
+      System.out.println("Input the number of characters to check");
+      int charCount = input.nextInt();
+      input.nextLine();
+
+      boolean same = sTools.frontAgain(inputStr, charCount);
+      System.out.println(same);
 
     } else {
       System.out.println("bruh");
