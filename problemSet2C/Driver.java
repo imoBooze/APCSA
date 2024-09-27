@@ -27,16 +27,26 @@ class Driver {
       System.out.println(op);
 
     } else if (option == 1) {
+      System.out.print("Input the x value of the first coordinate: ");
       double Ax = input.nextDouble();
+
+      System.out.print("Input the y value of the first coordinate: ");
       double Ay = input.nextDouble();
+
+      System.out.print("Input the x value of the second coordinate: ");
       double Bx = input.nextDouble();
+
+      System.out.print("Input the y value of the second coordinate: ");
       double By = input.nextDouble();
       input.nextLine();
 
       OrderedPair op0 = new OrderedPair(Ax, Ay);
       OrderedPair op1 = new OrderedPair(Bx, By);
 
-      System.out.println(Formula.findSlope(op0, op1));
+      System.out.println(
+          "A line between these two coordinates has a slope of "
+              + Formula.findSlope(op0, op1)
+              + ".");
 
     } else if (option == 2) {
       double Ax = input.nextDouble();
@@ -69,7 +79,7 @@ class Driver {
     } else if (option == 5) {
       int sides = input.nextInt();
       input.nextLine();
-      
+
       System.out.println(Formula.rollDie(sides));
 
     } else {
