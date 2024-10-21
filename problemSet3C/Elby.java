@@ -19,15 +19,14 @@ public class Elby {
 
     if (findKeyword(statement, "no", 0) >= 0) {
       response = "Why so negative?";
-
-    } else if (statement.indexOf("dog") >= 0 || statement.indexOf("cat") >= 0) {
+    } else if (findKeyword(statement, "dog", 0) >= 0 || statement.indexOf("cat") >= 0) {
       response = "Tell me more about your pets.";
-    } else if (statement.indexOf("Booze") >= 0) {
+    } else if (findKeyword(statement, "Booze", 0) >= 0) {
       response = "The potato.";
-    } else if (statement.indexOf("mother") >= 0
-        || statement.indexOf("father") >= 0
-        || statement.indexOf("sister") >= 0
-        || statement.indexOf("brother") >= 0) {
+    } else if (findKeyword(statement, "mother", 0) >= 0
+        || findKeyword(statement, "father", 0) >= 0
+        || findKeyword(statement, "sister", 0) >= 0
+        || findKeyword(statement, "brother", 0) >= 0) {
       response = "Tell me more about your family.";
     } else {
       response = getRandomResponse();
