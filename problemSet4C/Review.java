@@ -7,20 +7,21 @@ import java.util.Scanner;
 /** Class that contains helper methods for the Review Lab */
 public class Review {
 
-  public static void main(String[] args) {
-    System.out.println(totalSentiment("foobar.txt"));
-  }
+  public static void main(String[] args) {}
 
   public static double totalSentiment(String fileName) {
-    String str = textToString(fileName); 
+    String str = textToString(fileName);
+    int wordStart = -1;
+    int wordEnd = -1;
     double result = 0;
     for (int i = 0; i < str.length(); i++) {
-      if (str.indexOf(" ", i) != -1) {
-        result += sentimentVal(removePunctuation(str.substring(i, str.indexOf(" ", i))));
-        i = str.indexOf(" ", i);
-      } else {
-        result += sentimentVal(removePunctuation(str.substring(i, str.length())));
-        break;
+      if (str.indexOf(" ", i) == i) {
+        i++;
+        wordStart = i;
+        while (str.indexOf(" ", i) != i) {
+          i++;
+          wordEnd = i;
+        }
       }
     }
     return result;
@@ -50,7 +51,7 @@ public class Review {
       Scanner input = new Scanner(new File("positiveAdjectives.txt"));
       while (input.hasNextLine()) {
         String temp = input.nextLine().trim();
-        // System.out.println(temp);
+        System.out.println(temp);
         posAdjectives.add(temp);
       }
       input.close();
