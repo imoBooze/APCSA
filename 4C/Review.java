@@ -8,12 +8,14 @@ import java.util.Scanner;
 public class Review {
 
   public static void main(String[] args) {
-    System.out.println(totalSentiment("foobar.txt"));
-    System.out.println(starRating("foobar.txt"));
+    System.out.println(totalSentiment("foobarbar.txt"));
+    // System.out.println(starRating("foobar.txt"));
+    // System.out.println(fakeReview("foobarbar.txt"));
+    System.out.println(fakeReview2("foobarbar.txt"));
   }
 
   public static double totalSentiment(String fileName) {
-    String str = textToString(fileName); 
+    String str = textToString(fileName);
     double result = 0;
     for (int i = 0; i < str.length(); i++) {
       if (str.indexOf(" ", i) != -1) {
@@ -34,6 +36,63 @@ public class Review {
     else if (sentiment >= 0) return 3;
     else if (sentiment > -0.5) return 2;
     else return 1;
+  }
+
+  public static String fakeReview(String fileName) {
+    String str = textToString(fileName);
+    String result = "";
+    while (str.length() > 0) {
+      if (str.indexOf("*") != -1) {
+        result += str.substring(0, str.indexOf("*"));
+        str = str.substring(str.indexOf("*") + 1, str.length());
+        if (str.indexOf(" ") != -1) {
+          result += randomPositiveAdj() + getPunctuation(str.substring(0, str.indexOf(" ")));
+          str = str.substring(str.substring(0, str.indexOf(" ")).length());
+        } else {
+          result += randomPositiveAdj() + getPunctuation(str.substring(0, str.length()));
+          str = str.substring(str.length());
+        }
+      } else {
+        result += str.substring(0, str.length());
+        str = str.substring(str.length());
+      }
+    }
+    return result;
+  }
+
+  public static String fakeReview2(String fileName) {
+    String str = textToString(fileName);
+    String result = "";
+    while (str.length() > 0) {
+      if (str.indexOf("*") != -1) {
+        if (totalSentiment(fileName) > 0) { // Assume totalSentiment > 0 means review is positive
+          result += str.substring(0, str.indexOf("*"));
+          str = str.substring(str.indexOf("*") + 1, str.length());
+          if (str.indexOf(" ") != -1) {
+            result += randomPositiveAdj() + getPunctuation(str.substring(0, str.indexOf(" ")));
+            str = str.substring(str.substring(0, str.indexOf(" ")).length());
+          } else {
+            result += randomPositiveAdj() + getPunctuation(str.substring(0, str.length()));
+            str = str.substring(str.length());
+          }
+        } else { // Otherwise, review is negative
+          result += str.substring(0, str.indexOf("*"));
+          str = str.substring(str.indexOf("*") + 1, str.length());
+          if (str.indexOf(" ") != -1) {
+            result += randomNegativeAdj() + getPunctuation(str.substring(0, str.indexOf(" ")));
+            str = str.substring(str.substring(0, str.indexOf(" ")).length());
+          } else {
+            result += randomNegativeAdj() + getPunctuation(str.substring(0, str.length()));
+            str = str.substring(str.length());
+          }
+        }
+
+      } else { // If *s are no longer present, complete the rest of the string
+        result += str.substring(0, str.length());
+        str = str.substring(str.length());
+      }
+    }
+    return result;
   }
 
   private static HashMap<String, Double> sentiment = new HashMap<String, Double>();
