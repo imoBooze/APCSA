@@ -9,6 +9,7 @@ public class Review {
 
   public static void main(String[] args) {
     System.out.println(totalSentiment("foobar.txt"));
+    System.out.println(starRating("foobar.txt"));
   }
 
   public static double totalSentiment(String fileName) {
@@ -24,6 +25,15 @@ public class Review {
       }
     }
     return result;
+  }
+
+  public static int starRating(String fileName) {
+    double sentiment = totalSentiment(fileName);
+    if (sentiment > 1) return 5;
+    else if (sentiment > 0.5) return 4;
+    else if (sentiment >= 0) return 3;
+    else if (sentiment > -0.5) return 2;
+    else return 1;
   }
 
   private static HashMap<String, Double> sentiment = new HashMap<String, Double>();
