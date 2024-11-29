@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 class Sieve {
-  // Find primes
+  // Find primes using Sieve of Eratosthenes
   static ArrayList<Integer> ertt(int n) {
     ArrayList<Integer> result = new ArrayList<Integer>();
 
@@ -16,5 +16,16 @@ class Sieve {
     }
 
     return result;
+  }
+
+  // Goldback Conjecture
+  static String gdbh(int n) {
+    ArrayList<Integer> list = ertt(n);
+    for (int m : list) {
+      if (list.contains(n - m)) {
+        return m + " + " + (n - m) + " = " + n;
+      }
+    }
+    return "HOW???";
   }
 }
