@@ -18,15 +18,19 @@ public class TicTacToe {
 
     while (!Xwin || !Owin) {
       printBoard();
-      int row = Integer.parseInt(input.nextLine().substring(0, 1));
-      int column = Integer.parseInt(input.nextLine().substring(2, 3));
-      if (round / 2 == 0) {
+      String inputted = input.nextLine();
+      int row = Integer.parseInt(inputted.substring(0, 1));
+      int column = Integer.parseInt(inputted.substring(2, 3));
+      if (round % 2 != 0) {
         grid[row][column] = "X";
+        Xwin = checkWin("X");
       } else {
         grid[row][column] = "O";
+        // Owin = checkWin("O");
       }
       round++;
     }
+
     input.close();
   }
 
@@ -41,11 +45,22 @@ public class TicTacToe {
       }
       System.out.println();
     }
-    if (round / 2 == 0) {
+    if (round % 2 != 0) {
       System.out.println("Turn: X");
     } else {
       System.out.println("Turn: O");
     }
     System.out.print("Input desired coordinates row,column: ");
+  }
+
+  public boolean checkWin(String str) {
+    for (int i = 0; i < grid.length; i++) {
+      for (int j = 0; j < grid[i].length && grid[i][j].equals(str); j++) {
+        System.out.println(j);
+        if (j == grid[i].length - 1 && grid[i][j].equals(str)) return true;
+      }
+    }
+    
+    return false;
   }
 }
