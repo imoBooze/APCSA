@@ -15,18 +15,16 @@ public class TicTacToe {
     }
 
     Scanner input = new Scanner(System.in);
+
     printBoard();
     narration();
 
     while (!Xwin && !Owin) {
-      String inputted = input.nextLine();
-      int row = Integer.parseInt(inputted.substring(0, 1));
-      int column = Integer.parseInt(inputted.substring(2, 3));
       if (round % 2 == 0) {
-        grid[row][column] = "X";
+        setMove("X", input);
         Xwin = checkWin("X");
       } else {
-        grid[row][column] = "O";
+        setMove("O", input);
         Owin = checkWin("O");
       }
       round++;
@@ -50,9 +48,25 @@ public class TicTacToe {
     }
   }
 
+  public void setMove(String player, Scanner input) {
+    while (true) {
+      String inputted = input.nextLine();
+      int row = Integer.parseInt(inputted.substring(0, 1));
+      int column = Integer.parseInt(inputted.substring(2, 3));
+      if (row < grid[0].length && column < grid[0].length && grid[row][column].equals(" ")) {
+        grid[row][column] = player;
+        break;
+      } else {
+        System.out.println("Try again");
+        input.nextLine();
+      }
+    }
+ 
+  }
+
   public void narration() {
     if (!Xwin && !Owin) {
-      if (round % 2 != 0) {
+      if (round % 2 == 0) {
         System.out.println("Turn: X");
       } else {
         System.out.println("Turn: O");
