@@ -2,36 +2,42 @@ import java.util.Scanner;
 
 public class TicTacToe {
   String grid[][];
-  int round = 2;
-  boolean Xwin = false;
-  boolean Owin = false;
+  int round;
+  boolean Xwin;
+  boolean Owin;
+  Scanner input = new Scanner(System.in);
 
   public void game() {
-    grid = new String[3][3];
-    for (int i = 0; i < grid.length; i++) {
-      for (int j = 0; j < grid[i].length; j++) {
-        grid[i][j] = " ";
+    boolean playAgain = true;
+    do {
+      grid = new String[3][3];
+      for (int i = 0; i < grid.length; i++) {
+        for (int j = 0; j < grid[i].length; j++) {
+          grid[i][j] = " ";
+        }
       }
-    }
 
-    Scanner input = new Scanner(System.in);
+      // Initialize
+      round = 2;
+      Xwin = Owin = false;
 
-    printBoard();
-    narration();
-
-    while (!Xwin && !Owin) {
-      if (round % 2 == 0) {
-        setMove("X", input);
-        Xwin = checkWin("X");
-      } else {
-        setMove("O", input);
-        Owin = checkWin("O");
-      }
-      round++;
       printBoard();
       narration();
-    }
-    input.close();
+
+      while (!Xwin && !Owin) {
+        if (round % 2 == 0) {
+          setMove("X");
+          Xwin = checkWin("X");
+        } else {
+          setMove("O");
+          Owin = checkWin("O");
+        }
+        round++;
+        printBoard();
+        narration();
+      }
+      roundEnd();
+    } while (playAgain);
   }
 
   // Prints the current state of the board
@@ -48,22 +54,22 @@ public class TicTacToe {
     }
   }
 
-  public void setMove(String player, Scanner input) {
-    while (true) {
+  public void setMove(String player) {
+    boolean notValid = true;
+    do {
       String inputted = input.nextLine();
       int row = Integer.parseInt(inputted.substring(0, 1));
       int column = Integer.parseInt(inputted.substring(2, 3));
       if (row < grid[0].length && column < grid[0].length && grid[row][column].equals(" ")) {
         grid[row][column] = player;
-        break;
+        notValid = false;
       } else {
         System.out.println("Try again");
-        input.nextLine();
       }
-    }
- 
+    } while (notValid);
   }
 
+  // Display information
   public void narration() {
     if (!Xwin && !Owin) {
       if (round % 2 == 0) {
@@ -75,6 +81,18 @@ public class TicTacToe {
     } else {
       if (Xwin) System.out.println("X wins!");
       if (Owin) System.out.println("O wins!");
+    }
+  }
+
+  // Play new round or end game
+  public void roundEnd() {
+    System.out.println("Play again? Y/N");
+    if (input.nextLine().equals("Y")) {
+      System.out.println("Starting new game...");
+    } else if (input.nextLine().equals("N")) {
+      input.close();
+    } else {
+      System.out.println("Play again? Y/N");
     }
   }
 
