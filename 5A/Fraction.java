@@ -4,7 +4,7 @@ public class Fraction {
 
   public Fraction() {
     setNumerator(1);
-    setDenominator(1); 
+    setDenominator(1);
   }
 
   public Fraction(int a, int b) {
@@ -17,9 +17,9 @@ public class Fraction {
     setDenominator(Integer.parseInt(str.substring(str.indexOf("/") + 1)));
   }
 
-  public Fraction(Fraction frt) {
-    setNumerator(frt.numerator);
-    setDenominator(frt.denominator);
+  public Fraction(Fraction fraction) {
+    setNumerator(fraction.numerator);
+    setDenominator(fraction.denominator);
   }
 
   public int getNumerator() {
@@ -47,38 +47,55 @@ public class Fraction {
     }
   }
 
-  public void setNumerator(int a) {
-    numerator = a;
+  public void setNumerator(int n) {
+    numerator = n;
   }
 
-  public void setDenominator(int b) {
-    denominator = b;
-    if (denominator == 0) {
-      System.err.println("Error: Denominator cannot be zero; setting to 1");
-      denominator = 1;
-    }
+  public void setDenominator(int n) {
+    denominator = n;
+    if (denominator == 0) throw new ArithmeticException("denominator cannot be zero");
   }
 
   private int findGCF() { // Euclid's algorithm
-    int a = numerator;
-    int b = denominator;
-    while (a != b) {
-      if (a > b) a = a - b; // Subtract smaller number from larger number
-      else b = b - a;
+    int int0 = numerator;
+    int int1 = denominator;
+    while (int0 != int1) {
+      if (int0 > int1) int0 = int0 - int1; // Subtract smaller number from larger number
+      else int1 = int1 - int0;
     }
-    return a;
+    return int0;
   }
 
-  public static Fraction multiply(Fraction frt0, Fraction frt1) {
-    frt0.setNumerator(frt0.numerator * frt1.getNumerator());
-    frt0.setDenominator(frt0.denominator * frt1.getDenominator());
-    return frt0;
+  public static Fraction multiply(Fraction fraction0, Fraction fraction1) {
+    Fraction fractionTemporary = new Fraction(fraction0);
+    fractionTemporary.setNumerator(fraction0.getNumerator() * fraction1.getNumerator());
+    fractionTemporary.setDenominator(fraction0.getDenominator() * fraction1.getDenominator());
+    return fractionTemporary;
   }
 
-  public static Fraction divide(Fraction frt0, Fraction frt1) { // Currently broken
-    int frt1_numerator = frt1.getNumerator();
-    frt1.setNumerator(frt1.getDenominator());
-    frt1.setDenominator(frt1_numerator);
-    return multiply(frt0, frt1);
+  public static Fraction divide(Fraction fraction0, Fraction fraction1) {
+    Fraction fractionTemporary0 = new Fraction(fraction0);
+    Fraction fractionTemporary1 = new Fraction(fraction1);
+    fractionTemporary0.setNumerator(fraction1.getDenominator());
+    fractionTemporary1.setDenominator(fraction1.getNumerator());
+    return multiply(fractionTemporary0, fractionTemporary1);
+  }
+
+  public static Fraction add(Fraction fraction0, Fraction fraction1) {
+    Fraction fractionTemporary = new Fraction(fraction0);
+    fractionTemporary.setNumerator(
+        fraction0.getNumerator() * fraction1.getDenominator()
+            + fraction1.getNumerator() * fraction1.getDenominator());
+    fractionTemporary.setDenominator(fraction0.getDenominator() * fraction1.getDenominator());
+    return fractionTemporary;
+  }
+
+  public static Fraction subtract(Fraction fraction0, Fraction fraction1) {
+    Fraction fractionTemporary = new Fraction(fraction0);
+    fractionTemporary.setNumerator(
+        fraction0.getNumerator() * fraction1.getDenominator()
+            - fraction1.getNumerator() * fraction1.getDenominator());
+    fractionTemporary.setDenominator(fraction0.getDenominator() * fraction1.getDenominator());
+    return fractionTemporary;
   }
 }

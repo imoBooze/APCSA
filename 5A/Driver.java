@@ -1,21 +1,19 @@
 public class Driver {
   public static void main(String[] args) {
-    Fraction frt0 = new Fraction();
-    Fraction frt1 = new Fraction(frt0);
-    Fraction frt2 = new Fraction(1, 20);
-    Fraction frt3 = new Fraction(30, 50);
-    Fraction frt4 = new Fraction("1/3");
+    Fraction fraction0 = new Fraction();
+    Fraction fraction1 = new Fraction(fraction0);
+    Fraction fraction2 = new Fraction(1, 20);
+    Fraction fraction3 = new Fraction(30, 50);
+    Fraction fraction4 = new Fraction("1/3");
 
-    System.out.println(frt0);
-    System.out.println(frt1);
-    System.out.println(frt2);
-    System.out.println(frt3);
-    System.out.println(frt4);
+    fraction3.reduce();
 
-    frt3.reduce();
-    System.out.println(frt3);
+    System.out.println(fraction0);
+    System.out.println(fraction1);
+    System.out.println(fraction2);
+    System.out.println(fraction3);
+    System.out.println(fraction4);
 
-    System.out.println(Fraction.multiply(frt0, frt2));
-    System.out.println(Fraction.divide(frt0, frt2));
+    System.out.println(Fraction.divide(fraction0, fraction4)); 
   }
 }
