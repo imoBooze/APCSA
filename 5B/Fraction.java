@@ -2,9 +2,9 @@ public class Fraction {
   private int numerator;
   private int denominator;
 
-  public Fraction() { // Creates a random (relatively small) fraction (currently broken)
-    setNumerator((int) Math.random() * 100 + 1);
-    setDenominator((int) Math.random() * 100 + 1);
+  public Fraction() { // Creates a random (relatively small) fraction
+    setNumerator((int) (Math.random() * 10) + 1);
+    setDenominator((int) (Math.random() * 10) + 1);
   }
 
   public Fraction(int a, int b) {
