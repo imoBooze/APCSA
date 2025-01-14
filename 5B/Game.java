@@ -7,7 +7,6 @@ public class Game {
     int score = 0;
     int round = 0;
     while (true) {
-      round++;
       Fraction fraction0 = new Fraction();
       Fraction fraction1 = new Fraction();
       Fraction correctFraction = new Fraction();
@@ -42,7 +41,7 @@ public class Game {
         correctFraction.setDenominator(answerFraction.getDenominator());
 
       } else {
-        System.out.print("Game error");
+        System.out.print("Operation integer error");
         break;
       }
 
@@ -54,6 +53,7 @@ public class Game {
       } else if (response.equals("quit")) {
         break;
       } else System.out.println("Wrong, the answer is " + correctFraction);
+      round++;
     }
 
     input.close();
